@@ -12,7 +12,7 @@ var stage, label, bg1, bg2, bg3, bgs;
     stageEl.height = 100;
     containerEl.appendChild(stageEl);
 
-    var SLANT = 32;
+    var SLANT = 20;
 
     // Store some important coordinates we'll be needing later.
     var midX = stageEl.width / 2;
@@ -25,18 +25,20 @@ var stage, label, bg1, bg2, bg3, bgs;
         if (event.paused) return;
 
         bgs.forEach(function(bg) {
-            var tlX = Math.min(-(bg.width / 2) + SLANT, 0);
-            var trX = Math.max((bg.width / 2) - SLANT, 0);
-            var brX = Math.max(bg.width / 2, 0);
-            var blX = Math.min(-bg.width / 2, 0);
+            // The two left side x values. Will be inverted to get right side x values.
+            var tipX = Math.min(-(bg.width / 2), 0);
+            var baseX = Math.min(-(bg.width / 2) + SLANT, 0);
 
+            // Start at top left point, moves clockwise
             bg.graphics
                 .clear()
                 .beginFill(bg.color)
-                .moveTo(tlX, 0)
-                .lineTo(trX, 0)
-                .lineTo(brX, maxY)
-                .lineTo(blX, maxY)
+                .moveTo(baseX, 0)
+                .lineTo(-baseX, 0)
+                .lineTo(-tipX, maxY / 2)
+                .lineTo(-baseX, maxY)
+                .lineTo(baseX, maxY)
+                .lineTo(tipX, maxY / 2)
                 .closePath();
         });
 
@@ -57,14 +59,14 @@ var stage, label, bg1, bg2, bg3, bgs;
 
     bg2 = new createjs.Shape();
     bg2.name = 'bg2';
-    bg2.maxWidth = maxX - 20;
+    bg2.maxWidth = maxX - 23;
     bg2.width = 0;
     bg2.x = midX;
     bgContainer.addChild(bg2);
 
     bg1 = new createjs.Shape();
     bg1.name = 'bg1';
-    bg1.maxWidth = maxX - 50;
+    bg1.maxWidth = maxX - 54;
     bg1.width = 0;
     bg1.x = midX;
     bgContainer.addChild(bg1);
