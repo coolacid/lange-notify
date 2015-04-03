@@ -75,7 +75,7 @@ var stage, label, bg1, bg2, bg3, bgs;
     bgs = [bg1, bg2, bg3];
 
     // Create the text element
-    label = new createjs.Text('SUBSCRIBER', '800 65px proxima-nova', 'white');
+    label = new createjs.Text('SUBSCRIBER', '800 65px proxima-nova', '#F7F2E8');
     label.x = midX;
     label.showY = 11;
     label.hideY = 0;
