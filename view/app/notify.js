@@ -84,10 +84,10 @@
             }
         }, '+=1.5');
 
-        tl.to(foremostBg, 0.5, {
+        tl.to(foremostBg, 0.6, {
             width: foremostBg.maxWidth,
             ease: Elastic.easeOut.config(0.3, 0.4)
-        });
+        }, '+=0.01');
 
         // Animate out
         delay = 0;
