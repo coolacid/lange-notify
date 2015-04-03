@@ -34,7 +34,7 @@
 
     nodecg.listenFor('tip', function(tip) {
         // Got a tip from StreamTip
-        var amount = parseFloat(tip.amount.toFixed(2)).toLocaleString('en-US');
+        var amount = parseFloat(parseFloat(tip.amount).toFixed(2)).toLocaleString('en-US');
         notify(tip.currencySymbol + amount + ' TIP', truncateTo25(tip.username), TIP_COLORS);
     });
 
@@ -43,11 +43,11 @@
         secondMsg = secondMsg.toUpperCase();
         colors = colors || SUB_COLORS;
 
-        // Animate in
         var reverseBgs = bgs.slice(0).reverse();
         var foremostBg = bgs[0];
         var delay = 0;
 
+        // Animate in
         tl.add('npIn');
 
         tl.call(function() {
@@ -74,6 +74,7 @@
             ease: Back.easeOut.config(4)
         }, 'npIn+=' + (delay - DELAY_INCREMENT));
 
+        // Show second message
         tl.to(foremostBg, 0.6, {
             width: 0,
             ease: Elastic.easeIn.config(0.3, 0.4),
