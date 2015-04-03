@@ -1,0 +1,14 @@
+{
+    "name": "lange-notify",
+    "version": "0.0.1",
+    "nodecgDependency": "~0.5.4",
+    "homepage": "http://alexvan.camp/",
+    "authors": [
+        "Alex Van Camp <email@alexvan.camp>"
+    ],
+    "description": "Lange's notification bundle.",
+    "license": "MIT",
+    "extension": {
+        "path": "extension.js"
+    }
+}

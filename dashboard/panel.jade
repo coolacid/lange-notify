@@ -1,0 +1,20 @@
+.ncg-label(style="margin-top: 0;") MANUAL ENTRY
+.input-group.ctrl-name
+    span.input-group-addon Name
+    input.form-control(type="text", placeholder="NAME")
+.input-group.ctrl-months(style="margin-top: 2px;")
+    span.input-group-addon Months
+    input.form-control(type="text", placeholder="MONTHS")
+.input-group.hidden.ctrl-amount(style="margin-top: 2px;")
+    span.input-group-addon Amount
+    input.form-control(type="text", placeholder="AMOUNT")
+div(style="display: flex; margin-top:10px;")
+    .btn-group.btn-group-justified(data-toggle="buttons", style="width: 70%;")
+        label.btn.btn-xs.btn-info.form-control.active
+            input(type="radio", name="manualType", value="subscription", checked="")
+            | Sub
+        label.btn.btn-xs.btn-info.form-control
+            input(type="radio", name="manualType", value="tip")
+            | Tip
+    button.ctrl-send.btn.btn-xs.btn-success(type="button", style="width: 29%; margin-left: 4px;")
+        | Send
