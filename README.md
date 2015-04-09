@@ -33,6 +33,9 @@ Lange-notify will automatically listen for donation events from lfg-doncorleone.
 - Add `http://localhost:9090/view/lange-notify` (or whatever) as a Browser Source in OBS, with dimensions of 996x100
 - Use the "Notifications" panel on the dashboard to send test subs, resubs, and tips.
 
+### Additional Credits
+- Sound design by [Anthony "Airon" Oetzmann](http://aironaudio.weebly.com/) 
+
 ### License
 lange-notify is provided under the MIT license, which is available to read in the [LICENSE][] file.
 [license]: LICENSE
