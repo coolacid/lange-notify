@@ -30,7 +30,7 @@ StreamTip account that you wish to listen to:
 Lange-notify will automatically listen for donation events from lfg-doncorleone.
 
 ### Usage
-- Add `http://localhost:9090/view/lange-notify` (or whatever) as a Browser Source in OBS, with dimensions of 996x100
+- Add `http://localhost:9090/view/lange-notify` (or whatever) as a Browser Source in OBS, with dimensions of 992x100
 - Use the "Notifications" panel on the dashboard to send test subs, resubs, and tips.
 
 ### Additional Credits
