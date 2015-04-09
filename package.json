@@ -1,6 +1,6 @@
 {
   "name": "lange-notify",
   "dependencies": {
-    "streamtip-listener": "^1.1.0"
+    "streamtip-listener": "^1.2.1"
   }
 }

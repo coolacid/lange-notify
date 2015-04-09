@@ -36,6 +36,6 @@ module.exports = function(nodecg) {
             nodecg.log.error('StreamTip error! %s', err.message);
         });
     } else {
-        nodecg.log.warn('StreapTip configuration missing or incomplete, will not attempt to connect to StreamTip');
+        nodecg.log.info('StreamTip configuration missing or incomplete, will not attempt to connect to StreamTip');
     }
 };
