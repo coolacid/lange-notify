@@ -1,6 +1,7 @@
 {
   "name": "lange-notify",
   "dependencies": {
+    "node-localstorage": "^0.5.0",
     "streamtip-listener": "^1.2.1"
   }
 }

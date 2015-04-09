@@ -1,7 +1,20 @@
 (function () {
     'use strict';
 
+    // Load sounds
+    createjs.Sound.registerSound('snd/subscription.mp3', 'subscription');
+    createjs.Sound.registerSound('snd/tip.mp3', 'tip');
+    createjs.Sound.registerSound('snd/cut.mp3', 'cut');
+    createjs.Sound.registerSound('snd/out.mp3', 'out');
+
+    nodecg.declareSyncedVar({ name: 'inVolume' });
+    nodecg.declareSyncedVar({ name: 'cutVolume' });
+    nodecg.declareSyncedVar({ name: 'outVolume' });
+
+    // Permanent GSAP timeline
     var tl = new TimelineLite({ autoRemoveChildren: true });
+
+    // Dope constants.
     var DELAY_INCREMENT = 0.09;
     var SUB_COLORS = [
         '#e87933',
@@ -17,31 +30,42 @@
     var SECOND_MSG_FONT = '800 65px proxima-nova';
 
     nodecg.listenFor('subscription', 'lfg-sublistener', function(data) {
+        var firstMsg = 'NEW SUBSCRIBER';
         if (data.resub) {
-            notify('RESUB ×' + data.months, data.name, SUB_COLORS);
-        } else {
-            notify('NEW SUBSCRIBER', data.name, SUB_COLORS);
+            firstMsg = 'RESUB ×' + data.months;
         }
+
+        notify(firstMsg, data.name, {
+            colors: SUB_COLORS,
+            inSound: 'subscription'
+        });
     });
 
     nodecg.listenFor('newdonations', 'lfg-doncorleone', function(data) {
         // Got a tip from Barry's Donation Tracker
         data.Completed.forEach(function(donation) {
             var amount = parseFloat(donation.amount.toFixed(2)).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-            notify(amount + ' TIP', truncateTo25(donation.twitch_username), TIP_COLORS);
+            notify(amount + ' TIP', truncateTo25(donation.twitch_username), {
+                colors: TIP_COLORS,
+                inSound: 'tip'
+            });
         });
     });
 
     nodecg.listenFor('tip', function(tip) {
         // Got a tip from StreamTip
         var amount = parseFloat(parseFloat(tip.amount).toFixed(2)).toLocaleString('en-US');
-        notify(tip.currencySymbol + amount + ' TIP', truncateTo25(tip.username), TIP_COLORS);
+        notify(tip.currencySymbol + amount + ' TIP', truncateTo25(tip.username), {
+            colors: TIP_COLORS,
+            inSound: 'tip'
+        });
     });
 
-    function notify(firstMsg, secondMsg, colors) {
+    function notify(firstMsg, secondMsg, opts) {
         firstMsg = firstMsg.toUpperCase();
         secondMsg = secondMsg.toUpperCase();
-        colors = colors || SUB_COLORS;
+        opts = opts || {};
+        opts.colors = opts.colors || SUB_COLORS;
 
         var reverseBgs = bgs.slice(0).reverse();
         var foremostBg = bgs[0];
@@ -53,8 +77,9 @@
         tl.call(function() {
             var len = bgs.length;
             for (var i = 0; i < len; i++) {
-                bgs[i].color = colors[i];
+                bgs[i].color = opts.colors[i];
             }
+            createjs.Sound.play(opts.inSound).volume = nodecg.variables.inVolume;
         }, null, null, 'npIn');
 
         reverseBgs.forEach(function (bg) {
@@ -76,6 +101,9 @@
 
         // Show second message
         tl.to(foremostBg, 0.6, {
+            onStart: function() {
+                createjs.Sound.play('cut').volume = nodecg.variables.cutVolume;
+            },
             width: 0,
             ease: Elastic.easeIn.config(0.3, 0.4),
             onComplete: function () {
@@ -93,6 +121,9 @@
         delay = 0;
 
         tl.add('npOut', '+=4');
+        tl.call(function() {
+            createjs.Sound.play('out').volume = nodecg.variables.outVolume;
+        }, null, null, 'npOut');
         bgs.forEach(function (bg) {
             tl.to(bg, 0.7, {
                 width: 0,

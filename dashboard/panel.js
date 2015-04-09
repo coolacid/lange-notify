@@ -8,6 +8,12 @@ var $months = $panel.find('.ctrl-months');
 var $amount = $panel.find('.ctrl-amount');
 var $send = $panel.find('.ctrl-send');
 
+var VOLUMES = [
+    'inVolume',
+    'cutVolume',
+    'outVolume'
+];
+
 $show.click(function() { nodecg.sendMessage('pulse'); });
 
 $type.change(function() {
@@ -41,4 +47,24 @@ $send.click(function () {
             currencySymbol: '$'
         });
     }
+});
+
+VOLUMES.forEach(function(volume) {
+    var $slider = $panel.find('input[name="'+volume+'"]');
+
+    nodecg.declareSyncedVar({
+        name: volume,
+        setter: function(newVal) {
+            $slider.slider('setValue', newVal);
+        }
+    });
+
+    $slider.slider({
+        value: 0.3,
+        step: 0.01,
+        min: 0,
+        max: 1
+    }).on('slideStop', function(slideEvt) {
+        nodecg.variables[volume] = slideEvt.value;
+    });
 });

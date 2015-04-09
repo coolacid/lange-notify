@@ -1,4 +1,17 @@
-.ncg-label(style="margin-top: 0;") MANUAL ENTRY
+.ncg-label(style="margin-top: 0;") SOUND VOLUME
+div(style="margin-top: 10px;")
+    label(style="display: inline-block") In
+    input(type="text" name="inVolume" ctrltype="slider")
+
+div(style="margin-top: 30px;")
+    label(style="display: inline-block") Cut
+    input(type="text" name="cutVolume" ctrltype="slider")
+
+div(style="margin-top: 30px;")
+    label(style="display: inline-block") Out
+    input(type="text" name="outVolume" ctrltype="slider")
+
+.ncg-label(style="margin-top: 4px;") MANUAL ENTRY
 .input-group.ctrl-name
     span.input-group-addon Name
     input.form-control(type="text", placeholder="NAME")
@@ -8,7 +21,7 @@
 .input-group.hidden.ctrl-amount(style="margin-top: 2px;")
     span.input-group-addon Amount
     input.form-control(type="text", placeholder="AMOUNT")
-div(style="display: flex; margin-top:10px;")
+div(style="display: flex; margin-top:4px;")
     .btn-group.btn-group-justified(data-toggle="buttons", style="width: 70%;")
         label.btn.btn-xs.btn-info.form-control.active
             input(type="radio", name="manualType", value="subscription", checked="")
