@@ -58,7 +58,7 @@ $panel.find('input[ctrltype="slider"]').each(function(i, el) {
 });
 
 var soundVolumes = nodecg.Replicant('soundVolumes');
-soundVolumes.on('change', function(sounds) {
+soundVolumes.on('change', function(oldVal, sounds) {
     for (var sound in sounds) {
         if (!sounds.hasOwnProperty(sound)) continue;
         var $slider = $panel.find('input[name="'+sound+'"]');
