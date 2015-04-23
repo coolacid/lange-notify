@@ -55,6 +55,7 @@ VOLUMES.forEach(function(volume) {
     nodecg.declareSyncedVar({
         name: volume,
         setter: function(newVal) {
+            newVal = parseFloat(newVal);
             $slider.slider('setValue', newVal);
         }
     });
