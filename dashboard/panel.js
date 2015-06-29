@@ -8,12 +8,6 @@ var $months = $panel.find('.ctrl-months');
 var $amount = $panel.find('.ctrl-amount');
 var $send = $panel.find('.ctrl-send');
 
-var VOLUMES = [
-    'inVolume',
-    'cutVolume',
-    'outVolume'
-];
-
 $show.click(function() { nodecg.sendMessage('pulse'); });
 
 $type.change(function() {
@@ -49,23 +43,25 @@ $send.click(function () {
     }
 });
 
-VOLUMES.forEach(function(volume) {
-    var $slider = $panel.find('input[name="'+volume+'"]');
-
-    nodecg.declareSyncedVar({
-        name: volume,
-        setter: function(newVal) {
-            newVal = parseFloat(newVal);
-            $slider.slider('setValue', newVal);
-        }
-    });
-
-    $slider.slider({
+// Create bootstrap sliders
+$panel.find('input[ctrltype="slider"]').each(function(i, el) {
+    var $el = $(el);
+    var name = $el.attr('name');
+    $el.slider({
         value: 0.3,
         step: 0.01,
         min: 0,
         max: 1
     }).on('slideStop', function(slideEvt) {
-        nodecg.variables[volume] = slideEvt.value;
+        soundVolumes.value[name] = slideEvt.value;
     });
+});
+
+var soundVolumes = nodecg.Replicant('soundVolumes');
+soundVolumes.on('change', function(oldVal, sounds) {
+    for (var sound in sounds) {
+        if (!sounds.hasOwnProperty(sound)) continue;
+        var $slider = $panel.find('input[name="'+sound+'"]');
+        $slider.slider('setValue', sounds[sound]);
+    }
 });

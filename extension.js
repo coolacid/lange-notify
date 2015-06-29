@@ -1,34 +1,14 @@
 'use strict';
 
-if (typeof localStorage === 'undefined' || localStorage === null) {
-    var LocalStorage = require('node-localstorage').LocalStorage;
-    var localStorage = new LocalStorage('./db/lange-notify');
-}
-
-var DEFAULT_VOLUMES = [
-    0.5,
-    0.25,
-    0.25
-];
-var SOUND_VOLUME_NAMES = [
-    'inVolume',
-    'cutVolume',
-    'outVolume'
-];
-
 module.exports = function(nodecg) {
     // Load and persist volume settings
-    SOUND_VOLUME_NAMES.forEach(function(name, index) {
-        var initial = localStorage.getItem(name);
-        if (initial === null) initial = DEFAULT_VOLUMES[index];
-        nodecg.declareSyncedVar({
-            name: name,
-            initialVal: initial,
-            setter: function(newVal) {
-                localStorage.setItem(name, newVal);
-            }
-        });
-    });
+    nodecg.Replicant('soundVolumes', {
+        defaultValue: {
+            inVolume: 0.5,
+            cutVolume: 0.25,
+            outVolume: 0.25
+        }
+    })
 
     // Set up StreamTip
     if (nodecg.bundleConfig.streamTip &&

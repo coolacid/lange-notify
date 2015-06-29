@@ -7,9 +7,7 @@
     createjs.Sound.registerSound('snd/cut.mp3', 'cut');
     createjs.Sound.registerSound('snd/out.mp3', 'out');
 
-    nodecg.declareSyncedVar({ name: 'inVolume' });
-    nodecg.declareSyncedVar({ name: 'cutVolume' });
-    nodecg.declareSyncedVar({ name: 'outVolume' });
+    var soundVolumes = nodecg.Replicant('soundVolumes');
 
     // Permanent GSAP timeline
     var tl = new TimelineLite({ autoRemoveChildren: true });
@@ -79,7 +77,7 @@
             for (var i = 0; i < len; i++) {
                 bgs[i].color = opts.colors[i];
             }
-            createjs.Sound.play(opts.inSound).volume = nodecg.variables.inVolume;
+            createjs.Sound.play(opts.inSound).volume = soundVolumes.value.inVolume;
         }, null, null, 'npIn');
 
         reverseBgs.forEach(function (bg) {
@@ -102,7 +100,7 @@
         // Show second message
         tl.to(foremostBg, 0.6, {
             onStart: function() {
-                createjs.Sound.play('cut').volume = nodecg.variables.cutVolume;
+                createjs.Sound.play('cut').volume = soundVolumes.value.cutVolume;
             },
             width: 0,
             ease: Elastic.easeIn.config(0.3, 0.4),
@@ -122,7 +120,7 @@
 
         tl.add('npOut', '+=4');
         tl.call(function() {
-            createjs.Sound.play('out').volume = nodecg.variables.outVolume;
+            createjs.Sound.play('out').volume = soundVolumes.value.outVolume;
         }, null, null, 'npOut');
         bgs.forEach(function (bg) {
             tl.to(bg, 0.7, {
