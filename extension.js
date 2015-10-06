@@ -8,10 +8,11 @@ module.exports = function(nodecg) {
             cutVolume: 0.25,
             outVolume: 0.25
         }
-    })
+    });
 
     // Set up StreamTip
-    if (nodecg.bundleConfig.streamTip &&
+    if (nodecg.bundleConfig &&
+        nodecg.bundleConfig.streamTip &&
         nodecg.bundleConfig.streamTip.clientId &&
         nodecg.bundleConfig.streamTip.accessToken) {
 
