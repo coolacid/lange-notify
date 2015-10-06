@@ -1,3 +1,4 @@
+/* global createjs, TimelineLite, Elastic, Back, Power2, label, bgs */
 (function () {
     'use strict';
 
@@ -42,11 +43,15 @@
     nodecg.listenFor('newdonations', 'lfg-doncorleone', function(data) {
         // Got a tip from Barry's Donation Tracker
         data.Completed.forEach(function(donation) {
-            var amount = parseFloat(donation.amount.toFixed(2)).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            var amount = parseFloat(donation.amount.toFixed(2))
+                .toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+
+            /* jshint -W106 */
             notify(amount + ' TIP', truncateTo25(donation.twitch_username), {
                 colors: TIP_COLORS,
                 inSound: 'tip'
             });
+            /* jshint +W106 */
         });
     });
 
@@ -65,8 +70,8 @@
         opts = opts || {};
         opts.colors = opts.colors || SUB_COLORS;
 
-        var reverseBgs = bgs.slice(0).reverse();
-        var foremostBg = bgs[0];
+        var reverseBgs = window.bgs.slice(0).reverse();
+        var foremostBg = window.bgs[0];
         var delay = 0;
 
         // Animate in

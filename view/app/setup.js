@@ -1,4 +1,8 @@
+/* global createjs */
+
+/* jshint strict:false */
 var stage, label, bg1, bg2, bg3, bgs;
+/* jshint strict:true */
 
 (function() {
     'use strict';
