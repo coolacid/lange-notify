@@ -1,14 +1,11 @@
 'use strict';
 
 var $panel = $bundle.filter('.notify');
-var $show = $panel.find('.js-show');
 var $type = $panel.find('input:radio[name="manualType"]');
 var $name = $panel.find('.ctrl-name');
 var $months = $panel.find('.ctrl-months');
 var $amount = $panel.find('.ctrl-amount');
 var $send = $panel.find('.ctrl-send');
-
-$show.click(function() { nodecg.sendMessage('pulse'); });
 
 $type.change(function() {
     var val = $type.filter(':checked').val();

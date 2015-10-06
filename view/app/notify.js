@@ -99,7 +99,8 @@
                 label.text = firstMsg;
             },
             y: label.showY,
-            ease: Back.easeOut.config(4)
+            ease: Back.easeOut.config(4),
+            autoRound: false
         }, 'npIn+=' + (delay - DELAY_INCREMENT));
 
         // Show second message
