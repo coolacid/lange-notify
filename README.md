@@ -12,6 +12,9 @@ exactly as-is on other streams would be frustrating.
 
 [60fps YouTube demo w/ sound](https://www.youtube.com/watch?v=yMC4vuoset8)
 
+## Code Walkthrough (Oct. 6, 2015)
+This video goes through every line of code in this bundle. https://www.youtube.com/watch?v=ev0EG4L_Q8s
+
 ## Installation
 - Install to `nodecg/bundles/lange-notify`
 - To listen for subscriptions and resubs, install and configure [lfg-sublistener](https://github.com/SupportClass/lfg-sublistener).
