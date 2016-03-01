@@ -1,6 +1,48 @@
 {
   "name": "lange-notify",
-  "dependencies": {
-    "streamtip-listener": "^1.2.1"
+  "version": "1.0.0",
+  "description": "Lange's notification bundle.",
+  "homepage": "http://twitch.tv/langeh",
+  "scripts": {
+    "test": "npm run static",
+    "static": "eslint graphics/**/*.js"
+  },
+  "author": {
+    "name": "Alex Van Camp",
+    "email": "email@alexvan.camp",
+    "url": "http://alexvan.camp"
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "keywords": [
+    "notification",
+    "subscription",
+    "tip",
+    "nodecg-bundle",
+    "nodecg"
+  ],
+  "nodecg": {
+    "compatibleRange": "~0.7.0",
+    "bundleDependencies": {
+      "lfg-nucleus": "^1.1.0",
+      "lfg-sounds": "~0.1.0"
+    },
+    "graphics": [
+      {
+        "file": "index.html",
+        "width": 992,
+        "height": 100
+      }
+    ]
+  },
+  "repository": "https://lange@github.com/Lange/lange-notify.git",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^2.0.0",
+    "eslint-config-xo": "^0.11.0"
   }
 }
