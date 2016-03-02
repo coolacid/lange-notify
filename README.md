@@ -24,6 +24,7 @@ _If you already have NodeCG installed, skip to step #3._
 2. Open a command prompt and run the following commands to install NodeCG.
 Keep this command prompt open after NodeCG has been installed.
 	```sh
+	npm install -g bower
 	npm install -g nodecg-cli
 	mkdir nodecg
 	cd nodecg
