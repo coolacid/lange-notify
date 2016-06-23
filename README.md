@@ -34,9 +34,8 @@ Keep this command prompt open after NodeCG has been installed.
 3. Install lange-notify and three of the bundles that it depends on.
 	```sh
 	nodecg install lange/lange-notify
-	nodecg install "supportclass/lfg-filter#^2.0.0"
-	nodecg install "supportclass/lfg-nucleus#^1.1.0"
-	nodecg install "supportclass/lfg-sounds#~0.1.1"
+	nodecg install "supportclass/lfg-filter#^3.0.0"
+	nodecg install "supportclass/lfg-nucleus#^2.0.0"
 	```
 
 4. To listen for subscriptions and resubs, install and configure one of the following:
@@ -50,32 +49,15 @@ Keep this command prompt open after NodeCG has been installed.
 	nodecg install supportclass/lfg-streamtip
 	```
 
-6. Create `nodecg/cfg/lfg-sounds.json` with the following content:
-	```json
-	{
-	  "soundNames": [
-		"lange-notify-subscription",
-		"lange-notify-tip",
-		"lange-notify-cut",
-		"lange-notify-out"
-	  ]
-	}
-	```
-
-7. Start NodeCG.
+6. Start NodeCG.
 	```sh
 	nodecg start
 	```
 
-8. Open the dashboard ([`http://localhost:9090/dashboard`](http://localhost:9090/dashboard)) and navigate to the "Uploads" page (top left menu button).
-9. Download [these sound files](https://github.com/Lange/lange-notify/tree/master/sounds) and upload them to lfg-sounds.
-10. Go back to the main dashboard panels and click "EDIT SOUND ASSIGNMENTS" on the "Sounds" panel.
-11. Assign the matching sound file to each of the four sound events.
-
 ### Usage
 - Add [`http://localhost:9090/graphics/lange-notify`](http://localhost:9090/graphics/lange-notify) 
 (or whatever your NodeCG hostname and port are) as a Browser Source in OBS, with dimensions of 992x100
-- Use lfg-nucleus' "Notifications" panel on the dashboard to send test subs, resubs, and tips.
+- Use lfg-nucleus' "Notifications" panel on the dashboard ([`http://localhost:9090`](http://localhost:9090)) to send test subs, resubs, and tips.
 
 ### Additional Credits
 - Sound design by [Anthony "Airon" Oetzmann](http://aironaudio.weebly.com/) 

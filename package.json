@@ -1,6 +1,6 @@
 {
   "name": "lange-notify",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Lange's notification bundle.",
   "homepage": "http://twitch.tv/langeh",
   "scripts": {
@@ -26,10 +26,9 @@
     "nodecg"
   ],
   "nodecg": {
-    "compatibleRange": "~0.7.0",
+    "compatibleRange": "~0.8.0",
     "bundleDependencies": {
-      "lfg-nucleus": "^1.1.0",
-      "lfg-sounds": "~0.1.0"
+      "lfg-nucleus": "^2.0.0"
     },
     "graphics": [
       {
@@ -37,12 +36,36 @@
         "width": 992,
         "height": 100
       }
+    ],
+    "soundCues": [
+      {
+        "name": "sub",
+        "assignable": false,
+        "defaultFile": "sounds/sub.ogg"
+      },
+      {
+        "name": "tip",
+        "assignable": false,
+        "defaultFile": "sounds/tip.ogg"
+      },
+      {
+        "name": "cut",
+        "assignable": false,
+        "defaultFile": "sounds/cut.ogg"
+      },
+      {
+        "name": "out",
+        "assignable": false,
+        "defaultFile": "sounds/out.ogg"
+      }
     ]
   },
   "repository": "https://lange@github.com/Lange/lange-notify.git",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^2.0.0",
-    "eslint-config-xo": "^0.11.0"
+    "babel-eslint": "^6.0.5",
+    "eslint": "^2.13.1",
+    "eslint-config-xo": "^0.15.2",
+    "eslint-plugin-babel": "^3.3.0"
   }
 }

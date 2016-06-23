@@ -1,42 +1,42 @@
-/* global createjs */
-
+/* eslint-disable no-var */
 var stage;
 var label;
 var bg1;
 var bg2;
 var bg3;
 var bgs;
+/* eslint-enable no-var */
 
 (function () {
 	'use strict';
 
 	// Create the canvas element that will become the render target.
 	// EaselJS calls this a "stage".
-	var containerEl = document.getElementById('container');
-	var stageEl = document.createElement('canvas');
+	const containerEl = document.getElementById('container');
+	const stageEl = document.createElement('canvas');
 	stageEl.id = 'notification';
 	stageEl.width = 992;
 	stageEl.height = 100;
 	containerEl.appendChild(stageEl);
 
-	var SLANT = 20;
+	const SLANT = 20;
 
 	// Store some important coordinates we'll be needing later.
-	var midX = stageEl.width / 2;
-	var maxX = stageEl.width - SLANT;
-	var maxY = stageEl.height;
+	const midX = stageEl.width / 2;
+	const maxX = stageEl.width - SLANT;
+	const maxY = stageEl.height;
 
 	// Create the stage on the target canvas, and create a ticker that will render at 60 fps.
 	stage = new createjs.Stage('notification');
-	createjs.Ticker.addEventListener('tick', function (event) {
+	createjs.Ticker.addEventListener('tick', event => {
 		if (event.paused) {
 			return;
 		}
 
-		bgs.forEach(function (bg) {
+		bgs.forEach(bg => {
 			// The two left side x values. Will be inverted to get right side x values.
-			var tipX = Math.min(-(bg.width / 2), 0);
-			var baseX = Math.min(-(bg.width / 2) + SLANT, 0);
+			const tipX = Math.min(-(bg.width / 2), 0);
+			const baseX = Math.min(-(bg.width / 2) + SLANT, 0);
 
 			// Start at top left point, moves clockwise
 			bg.graphics
@@ -56,7 +56,7 @@ var bgs;
 	createjs.Ticker.framerate = 60;
 	createjs.Ticker.timingMode = createjs.Ticker.RAF_SYNCHED;
 
-	var bgContainer = new createjs.Container();
+	const bgContainer = new createjs.Container();
 	stage.addChild(bgContainer);
 
 	// Create the three background elements

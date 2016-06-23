@@ -1,0 +1,15 @@
+{
+	"env": {
+		"browser": true
+	},
+	"globals": {
+		"nodecg": true,
+		"createjs": true,
+		"TimelineLite": true,
+		"Elastic": true,
+		"Back": true,
+		"Power2": true,
+		"label": true,
+		"bgs": true
+	}
+}

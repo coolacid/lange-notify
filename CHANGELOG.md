@@ -1,3 +1,18 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/Lange/lange-notify/compare/v1.0.0...v2.0.0) (2016-06-23)
+
+
+### Code Refactoring
+
+* port to NodeCG v0.8 ([62d8e06](https://github.com/Lange/lange-notify/commit/62d8e06))
+
+
+### BREAKING CHANGES
+
+* no longer supports NodeCG v0.7
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/Lange/lange-notify/compare/v0.0.1...v1.0.0) (2016-03-02)
 

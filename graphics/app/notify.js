@@ -1,42 +1,41 @@
-/* global TimelineLite, Elastic, Back, Power2, label, bgs, lfgSound */
 (function () {
 	'use strict';
 
 	// Permanent GSAP timeline
-	var tl = new TimelineLite({autoRemoveChildren: true});
+	const tl = new TimelineLite({autoRemoveChildren: true});
 
 	// Dope constants.
-	var DELAY_INCREMENT = 0.09;
-	var SUB_COLORS = [
+	const DELAY_INCREMENT = 0.09;
+	const SUB_COLORS = [
 		'#e87933',
 		'#f6ce14',
 		'#6bba82'
 	];
-	var TIP_COLORS = [
+	const TIP_COLORS = [
 		'#6bba82',
 		'#e87933',
 		'#f6ce14'
 	];
-	var FIRST_MSG_FONT = '800 65px proxima-nova';
-	var SECOND_MSG_FONT = '800 65px proxima-nova';
+	const FIRST_MSG_FONT = '800 65px proxima-nova';
+	const SECOND_MSG_FONT = '800 65px proxima-nova';
 
-	nodecg.listenFor('subscription', 'lfg-nucleus', function (data) {
-		var firstMsg = 'NEW SUBSCRIBER';
+	nodecg.listenFor('subscription', 'lfg-nucleus', data => {
+		let firstMsg = 'NEW SUBSCRIBER';
 		if (data.resub) {
-			firstMsg = 'RESUB ×' + data.months;
+			firstMsg = `RESUB × ${data.months}`;
 		}
 
 		notify(firstMsg, data.name, {
 			colors: SUB_COLORS,
-			inSound: 'lange-notify-subscription'
+			inSound: 'sub'
 		});
 	});
 
-	nodecg.listenFor('tip', 'lfg-nucleus', function (tip) {
+	nodecg.listenFor('tip', 'lfg-nucleus', tip => {
 		// Got a tip from StreamTip
-		notify(tip.formattedAmount + ' TIP', truncateTo25(tip.name), {
+		notify(`${tip.formattedAmount} TIP`, truncateTo25(tip.name), {
 			colors: TIP_COLORS,
-			inSound: 'lange-notify-tip'
+			inSound: 'tip'
 		});
 	});
 
@@ -46,47 +45,47 @@
 		opts = opts || {};
 		opts.colors = opts.colors || SUB_COLORS;
 
-		var reverseBgs = window.bgs.slice(0).reverse();
-		var foremostBg = window.bgs[0];
-		var delay = 0;
+		const reverseBgs = window.bgs.slice(0).reverse();
+		const foremostBg = window.bgs[0];
+		let delay = 0;
 
 		// Animate in
 		tl.add('npIn');
 
-		tl.call(function () {
-			var len = bgs.length;
-			for (var i = 0; i < len; i++) {
+		tl.call(() => {
+			const len = bgs.length;
+			for (let i = 0; i < len; i++) {
 				bgs[i].color = opts.colors[i];
 			}
-			lfgSound.play(opts.inSound);
+			nodecg.playSound(opts.inSound);
 		}, null, null, 'npIn');
 
-		reverseBgs.forEach(function (bg) {
+		reverseBgs.forEach(bg => {
 			tl.to(bg, 0.75, {
 				width: bg.maxWidth,
 				ease: Elastic.easeOut.config(0.3, 0.4)
-			}, 'npIn+=' + delay);
+			}, `npIn+=${delay}`);
 			delay += DELAY_INCREMENT;
 		});
 
 		tl.to(label, 0.6, {
-			onStart: function () {
+			onStart() {
 				label.font = FIRST_MSG_FONT;
 				label.text = firstMsg;
 			},
 			y: label.showY,
 			ease: Back.easeOut.config(4),
 			autoRound: false
-		}, 'npIn+=' + (delay - DELAY_INCREMENT));
+		}, `npIn+=${delay - DELAY_INCREMENT}`);
 
 		// Show second message
 		tl.to(foremostBg, 0.6, {
-			onStart: function () {
-				lfgSound.play('lange-notify-cut');
+			onStart() {
+				nodecg.playSound('cut');
 			},
 			width: 0,
 			ease: Elastic.easeIn.config(0.3, 0.4),
-			onComplete: function () {
+			onComplete() {
 				label.font = SECOND_MSG_FONT;
 				label.text = secondMsg;
 			}
@@ -101,30 +100,30 @@
 		delay = 0;
 
 		tl.add('npOut', '+=4');
-		tl.call(function () {
-			lfgSound.play('lange-notify-out');
+		tl.call(() => {
+			nodecg.playSound('out');
 		}, null, null, 'npOut');
-		bgs.forEach(function (bg) {
+		bgs.forEach(bg => {
 			tl.to(bg, 0.7, {
 				width: 0,
 				ease: Elastic.easeIn.config(0.3, 0.4)
-			}, 'npOut+=' + delay);
+			}, `npOut+=${delay}`);
 			delay += DELAY_INCREMENT;
 		});
 
 		tl.to(label, 0.467, {
 			y: label.hideY,
 			ease: Power2.easeIn
-		}, 'npOut+=' + delay);
+		}, `npOut+=${delay}`);
 
 		// Kill time between successive notifications
 		tl.to({}, 1, {});
 	}
 
 	function truncateTo25(text) {
-		var len = text.length;
+		const len = text.length;
 		if (len > 25) {
-			var truncated = text.substring(0, 23);
+			let truncated = text.substring(0, 23);
 			truncated += '…';
 			return truncated;
 		}

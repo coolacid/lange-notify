@@ -1,11 +1,10 @@
 {
-	"root": true,
-	"extends": "xo/browser",
-	"globals": {
-		"nodecg": true
-	},
+	"extends": "xo/esnext",
 	"rules": {
 		"new-cap": [
+			0
+		],
+		"babel/new-cap": [
 			2,
 			{
 				"capIsNewExceptions": [
