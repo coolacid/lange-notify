@@ -19,13 +19,13 @@
 	const FIRST_MSG_FONT = '800 65px proxima-nova';
 	const SECOND_MSG_FONT = '800 65px proxima-nova';
 
-	nodecg.listenFor('subscription', 'lfg-nucleus', data => {
-		let firstMsg = 'NEW SUBSCRIBER';
-		if (data.resub) {
-			firstMsg = `RESUB × ${data.months}`;
-		}
+	nodecg.listenFor('newFollower', 'nodecg-followers', data => {
+		let firstMsg = 'NEW FOLLOWER';
+//		if (data.resub) {
+//			firstMsg = `RESUB × ${data.months}`;
+//		}
 
-		notify(firstMsg, data.name, {
+		notify(firstMsg, data.latestNewFollower, {
 			colors: SUB_COLORS,
 			inSound: 'sub'
 		});
