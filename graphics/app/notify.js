@@ -25,7 +25,7 @@
 //			firstMsg = `RESUB × ${data.months}`;
 //		}
 
-		notify(firstMsg, data.latestNewFollower, {
+		notify(firstMsg, data.user.display_name, {
 			colors: SUB_COLORS,
 			inSound: 'sub'
 		});
